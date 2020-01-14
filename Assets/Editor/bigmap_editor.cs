@@ -44,15 +44,21 @@ public class bigmap_editor : EditorWindow
 
         if (GUILayout.Button("保存"))
         {
-            // ExportChunksToScenes();
+            ExportChunksToScenes();
             //string path = Application.dataPath + "/Worlds/Chunks";
             //Debug.Log("path is " + path);
-            MakeExportFolder();
+            //MakeExportFolder();
+
+            //string chunkScenePath = "Assets/Worlds/Chunks/_worldtrunk1_1.unity";
+            //string originalScenePath = "Assets/Scenes/SampleScene.unity";// CurrentScene();
+
+            //AssetDatabase.CopyAsset(originalScenePath, chunkScenePath);
+
         }
     }
 
 
-    static void MakeExportFolder()
+    static string MakeExportFolder(string srcName,bool b, out string sceneDir, out string sceneName)
     {
         //string pathDir = Application.dataPath + "/Worlds/Chunks";
 
@@ -65,49 +71,15 @@ public class bigmap_editor : EditorWindow
         {
             CreateFolder("Chunks");
         }
+
+        sceneDir = "Assets/Worlds/Chunks";
+        sceneName = null;
+
+        return "Assets/Worlds/Chunks";// GetFullPath(srcName);
     }
 
 
-    /// 检测是否存在文件夹
-    public static bool IsFolderExists(string folderPath)
-    {
-        if (folderPath.Equals(string.Empty))
-        {
-            return false;
-        }
-
-        return Directory.Exists(GetFullPath(folderPath));
-    }
-
-    /// 创建文件夹
-    public static void CreateFolder(string folderPath)
-    {
-        if (!IsFolderExists(folderPath))
-        {
-            Directory.CreateDirectory(GetFullPath(folderPath));
-
-            AssetDatabase.Refresh();
-        }
-    }
-
-
-    /// 返回Application.dataPath下完整目录
-    private static string GetFullPath(string srcName)
-    {
-        if (srcName.Equals(string.Empty))
-        {
-            return Application.dataPath;
-        }
-
-        if (srcName[0].Equals('/'))
-        {
-            srcName.Remove(0, 1);
-        }
-
-        return Application.dataPath + "/Worlds" +"/" + srcName;
-    }
-
-
+   
 
 
     void titile()
@@ -139,6 +111,8 @@ public class bigmap_editor : EditorWindow
             ClassifyGameObject(objsToProcess[i], width, height);
         }
 
+        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+        AssetDatabase.Refresh();
 
         EditorUtility.ClearProgressBar();
 
@@ -146,9 +120,15 @@ public class bigmap_editor : EditorWindow
     }
 
 
+    static string CurrentScene()
+    {
+        //return Application.dataPath + "/Scenes/SampleScene.unity";
 
-    /*
-     
+        return "Assets/Scenes/SampleScene.unity";
+    }
+
+
+
     static void ExportChunksToScenes()
     {
         EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
@@ -199,15 +179,20 @@ public class bigmap_editor : EditorWindow
             counter += 1;
             EditorUtility.DisplayProgressBar(progressTitle, "Processing " + rootName, (float)counter / (float)rootsNamesToExport.Count);
             string chunkScenePath = exportDir + "/" + rootName + ".unity";
-            AssetDatabase.CopyAsset(originalScenePath, chunkScenePath);
-            EditorSceneManager.OpenScene(chunkScenePath, OpenSceneMode.Single);
 
+            AssetDatabase.CopyAsset(originalScenePath, chunkScenePath);
+
+
+            EditorSceneManager.OpenScene(chunkScenePath, OpenSceneMode.Single);
             GameObject[] tempRoots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
             foreach (GameObject r in tempRoots)
             {
+
                 if (r.name != rootName)
                 {
-                    EngineUtils.Destroy(r);
+                    //EngineUtils.Destroy(r);
+                    Object.DestroyImmediate(r);
+
                 }
             }
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
@@ -215,22 +200,23 @@ public class bigmap_editor : EditorWindow
         }
 
 
-        //// 拷贝出一个删除了Chunk物体的Base场景
-        //string baseScenePath = sceneDir + "/" + "baseworld.unity";
-        //AssetDatabase.DeleteAsset(baseScenePath);
-        //AssetDatabase.CopyAsset(originalScenePath, baseScenePath);
-        //EditorSceneManager.OpenScene(baseScenePath, OpenSceneMode.Single);
+        // 拷贝出一个删除了Chunk物体的Base场景
+        string baseScenePath = sceneDir + "/" + "baseworld.unity";
+        AssetDatabase.DeleteAsset(baseScenePath);
+        AssetDatabase.CopyAsset(originalScenePath, baseScenePath);
+        EditorSceneManager.OpenScene(baseScenePath, OpenSceneMode.Single);
 
-        //GameObject[] chunkRoots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
-        //foreach (GameObject r in chunkRoots)
-        //{
-        //    if (rootsNamesToExport.Contains(r.name))
-        //    {
-        //        EngineUtils.Destroy(r);
-        //    }
-        //}
-        //EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
-        //AssetDatabase.Refresh();
+        GameObject[] chunkRoots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject r in chunkRoots)
+        {
+            if (rootsNamesToExport.Contains(r.name))
+            {
+                //EngineUtils.Destroy(r);
+                Object.DestroyImmediate(r);
+            }
+        }
+        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+        AssetDatabase.Refresh();
 
         // Cleanup
         EditorUtility.ClearProgressBar();
@@ -239,7 +225,7 @@ public class bigmap_editor : EditorWindow
 
     }
 
-    */
+    /**/
 
     static void ClassifyGameObject(GameObject obj,float width,float height)
     {
@@ -303,4 +289,47 @@ public class bigmap_editor : EditorWindow
         }
 
     }
+
+
+
+    /// 检测是否存在文件夹
+    public static bool IsFolderExists(string folderPath)
+    {
+        if (folderPath.Equals(string.Empty))
+        {
+            return false;
+        }
+
+        return Directory.Exists(GetFullPath(folderPath));
+    }
+
+    /// 创建文件夹
+    public static void CreateFolder(string folderPath)
+    {
+        if (!IsFolderExists(folderPath))
+        {
+            Directory.CreateDirectory(GetFullPath(folderPath));
+
+            AssetDatabase.Refresh();
+        }
+    }
+
+
+    /// 返回Application.dataPath下完整目录
+    private static string GetFullPath(string srcName)
+    {
+        if (srcName.Equals(string.Empty))
+        {
+            return Application.dataPath;
+        }
+
+        if (srcName[0].Equals('/'))
+        {
+            srcName.Remove(0, 1);
+        }
+
+        return Application.dataPath + "/Worlds" + "/" + srcName;
+    }
+
+
 }
