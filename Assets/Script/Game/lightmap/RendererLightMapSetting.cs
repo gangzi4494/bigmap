@@ -49,6 +49,10 @@ public class RendererLightMapSetting : MonoBehaviour
         if (Application.isPlaying)
         {
             LoadSettings();
+
+            ///
+            //GameObject gameObj = GameObject.Find("scene_root");
+            //gameObj.GetComponent<SceneLightMapSetting>().DynamicLoadSettingsByName(lightmapIndex);
         }
     }
 

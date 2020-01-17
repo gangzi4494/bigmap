@@ -11,7 +11,7 @@ public class SceneTools
         ".unity",
     };
 
-    [MenuItem("场景相关/1. 保存场景光照贴图信息", false, 111)]
+    [MenuItem("场景相关/1. 批量挂载光照信息", false, 111)]
     public static void SaveSceneMapLightSetting()
     {
         UnityEngine.Object[] selObjs = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.DeepAssets);

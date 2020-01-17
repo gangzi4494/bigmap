@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8230912216882860304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6216529474672815687}
+  - component: {fileID: 4872519875650765616}
+  m_Layer: 0
+  m_Name: scene_root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6216529474672815687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230912216882860304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7459414, y: 7.8413343, z: -0.5335541}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4872519875650765616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230912216882860304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b434f0f10d786c49bdb7fdc6ff88c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightmapFar:
+  - {fileID: 2800000, guid: cb31d1f4bc090ce4dad5e15d8f49a0c7, type: 3}
+  - {fileID: 2800000, guid: c029570999eb95f468840203da2f488f, type: 3}
+  - {fileID: 2800000, guid: d42f51f009bac7a45a20a8cff01db3a8, type: 3}
+  - {fileID: 2800000, guid: 9a021adf8ce5dd241b4e32dbcda28ec0, type: 3}
+  - {fileID: 2800000, guid: da9759eb36506314bbad391ba3e66e28, type: 3}
+  - {fileID: 2800000, guid: fb1cff78f2e09f84c9e160db07e4e077, type: 3}
+  - {fileID: 2800000, guid: b21fb4f21e68f814194ca2b558b80235, type: 3}
+  lightmapNear:
+  - {fileID: 2800000, guid: 99f1001933d8fb347aa3af331939c734, type: 3}
+  - {fileID: 2800000, guid: fa90d28625401c44db8de77a06a00139, type: 3}
+  - {fileID: 2800000, guid: 3b0dcfe4a9af6a54e968a127f027ad09, type: 3}
+  - {fileID: 2800000, guid: 013fb2dc45904674a8900b0e9a7b43ab, type: 3}
+  - {fileID: 2800000, guid: e508237dbdf9daf45befb0c9b1879298, type: 3}
+  - {fileID: 2800000, guid: 75108223149ed2d4a808a9068d2a5f9d, type: 3}
+  - {fileID: 2800000, guid: 4e4572ab810649a4d914a18184eb72cc, type: 3}
+  mode: 1
+  str_lightmapColor:
+  - Lightmap-0_comp_light
+  - Lightmap-1_comp_light
+  - Lightmap-2_comp_light
+  - Lightmap-3_comp_light
+  - Lightmap-4_comp_light
+  - Lightmap-5_comp_light
+  - Lightmap-6_comp_light
+  str_lightmapDir:
+  - Lightmap-0_comp_dir
+  - Lightmap-1_comp_dir
+  - Lightmap-2_comp_dir
+  - Lightmap-3_comp_dir
+  - Lightmap-4_comp_dir
+  - Lightmap-5_comp_dir
+  - Lightmap-6_comp_dir
